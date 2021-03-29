@@ -6,7 +6,8 @@ from textwrap import TextWrapper
 from news_scraper import NewsScraper
 from user_settings import settings, set_file_name, change_settings
 
-url = sys.argv[1]
+url = 'https://meduza.io/feature/2021/03/29/otdelenie-ran-podgotovilo-doklad-o-zagryaznenii-atmosfery-i-pochvy-v-sibiri-i-zasekretilo-ego-poschitav-bomboy-nakanune-vyborov'
+# url = sys.argv[1]
 change_settings()
 
 file_name = set_file_name(url)
@@ -22,6 +23,7 @@ headline = NewsScraper.get_main_headline(headlines)
 # под нулевым индексом
 if headline is not None:
     headline = headline.text
+    headline = wrapper.fill(headline)
     print(headline)
     print('\n')
     with open(file_name, 'w+', encoding='utf-8') as file:
@@ -35,6 +37,19 @@ if body is not None:
 
     for paragraph in body:
         body = wrapper.fill(paragraph)
+        print('\n' + body)
+        with open(file_name, 'a+', encoding='utf-8') as file:
+            file.write('\n' + body + '\n')  # записать каждый абзац в файл
+else:
+    whitelist = [
+        'p'
+    ]
+
+    body = [t for t in soup.find_all(text=True) if t.parent.name in whitelist]
+
+    for paragraph in body:
+        body = wrapper.fill(paragraph)
+        body = body.replace(u'\xa0', ' ')  # escape &nbsp
         print('\n' + body)
         with open(file_name, 'a+', encoding='utf-8') as file:
             file.write('\n' + body + '\n')  # записать каждый абзац в файл

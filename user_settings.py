@@ -16,9 +16,9 @@ def set_file_name(url: str):
 
     split_url = url.split('/')
     split_url = split_url[:-1]
-    res = ' '.join([str(item) for item in split_url])
-    res += '.txt'
-    return res
+    name = ' '.join([str(item) for item in split_url])
+    name += '.txt'
+    return name
 
 
 def print_settings(to_change: bool):
