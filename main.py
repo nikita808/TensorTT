@@ -6,8 +6,8 @@ from textwrap import TextWrapper
 from news_scraper import NewsScraper
 from user_settings import settings, set_file_name, change_settings
 
-url = 'https://meduza.io/feature/2021/03/29/otdelenie-ran-podgotovilo-doklad-o-zagryaznenii-atmosfery-i-pochvy-v-sibiri-i-zasekretilo-ego-poschitav-bomboy-nakanune-vyborov'
-# url = sys.argv[1]
+url = sys.argv[1]
+
 change_settings()
 
 file_name = set_file_name(url)
