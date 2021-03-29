@@ -30,5 +30,5 @@ class NewsScraper:
 
         if settings['separate_text_by_paragraphs']:
             body = body.split('\n\n')  # разделить по абзацам
-            
+
         return body
